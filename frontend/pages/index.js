@@ -97,15 +97,16 @@ export default function Home() {
 
 		switch (seat.seat.status) {
 			case "ISBEINGOCCUPIED":
-				window.alert(`${seat.col}${seat.seatLetter} is being occupied!`)
+				window.alert(`${seat.col + 1}${seat.seatLetter} is being occupied!`)
+				break
 			case "OCCUPIED":
 			case "NOTBOOKABLE":
-				window.alert(`${seat.col}${seat.seatLetter} has been taken!`)
+				window.alert(`${seat.col + 1}${seat.seatLetter} has been taken!`)
 				break
 			case "AVAILABLE":
 				let res = await updateSeatOnServer(seat, "TEMPORARILYOCCUPY")
 				if (!res) {
-					window.alert(`${seat.col}${seat.seatLetter} is being occupied!`)
+					window.alert(`${seat.col + 1}${seat.seatLetter} is being occupied!`)
 				} else {
 					addYourSeatIntoCinemaData({ seat })
 				}
