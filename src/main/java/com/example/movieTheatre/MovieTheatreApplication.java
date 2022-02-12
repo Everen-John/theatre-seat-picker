@@ -32,7 +32,7 @@ public class MovieTheatreApplication {
 		for (int i = 0; i < submissionInput.seatCellsInput.length; i++) {
 
 			seatCellsString += Character.toString(submissionInput.seatCellsInput[i].getSeatLetter()) +
-					+submissionInput.seatCellsInput[i].getCol() + ": "
+					+(submissionInput.seatCellsInput[i].getCol() + 1) + ": "
 					+ submissionInput.seatCellsInput[i].getSeat().getType()
 					+ "\n ";
 			System.out.println(seatCellsString);
