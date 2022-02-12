@@ -55,12 +55,17 @@ npm run build
 npm run start
 ```
 
+For a build version
+
 OR
 
 ```
+cd frontend
 npm i
 npm run dev
 ```
+
+For a development version
 
 ## Build the System on Docker
 
