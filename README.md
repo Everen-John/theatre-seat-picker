@@ -4,7 +4,7 @@ This project is a theatre seat picking system made with Java Spring as the backe
 
 ## Live View
 
-The system's live version can be seen [here](www.example.com)
+The system's live version can be seen [here](https://peaceful-springs-56939.herokuapp.com/)
 
 ## Getting Started
 

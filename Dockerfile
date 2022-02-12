@@ -22,7 +22,7 @@ COPY ${FRONTEND} frontend/
 COPY ${ENTRYPOINTSH} entrypoint.sh
 
 EXPOSE 8080
-EXPOSE 3000
+EXPOSE 80
 
 WORKDIR "/frontend"
 RUN npm ci
