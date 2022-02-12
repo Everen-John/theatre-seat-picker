@@ -33,16 +33,16 @@ export default function Home() {
 
 	const router = useRouter()
 
-	const loadPage = async () => {
-		return new Promise(async (resolve, reject) => {
-			let res = await loadCinemaData()
-			console.log(res)
-			resolve(res)
-		}).then((res) => {
-			setCinemaData(res)
-			setIsLoading(false)
-		})
-	}
+	// const loadPage = async () => {
+	// 	return new Promise(async (resolve, reject) => {
+	// 		let res = await loadCinemaData()
+	// 		console.log(res)
+	// 		resolve(res)
+	// 	}).then((res) => {
+	// 		setCinemaData(res)
+	// 		setIsLoading(false)
+	// 	})
+	// }
 
 	const addYourSeatIntoCinemaData = ({ seat: seatCell }) => {
 		let newCinemaData = { ...cinemaData }
@@ -183,6 +183,16 @@ export default function Home() {
 	}
 
 	useEffect(() => {
+		const loadPage = async () => {
+			return new Promise(async (resolve, reject) => {
+				let res = await loadCinemaData()
+				console.log(res)
+				resolve(res)
+			}).then((res) => {
+				setCinemaData(res)
+				setIsLoading(false)
+			})
+		}
 		loadPage()
 	}, [])
 

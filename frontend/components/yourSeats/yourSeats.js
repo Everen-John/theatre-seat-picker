@@ -58,6 +58,7 @@ const YourSeats = ({
 				<div className='grid gap-3 grid-cols-4 md:grid-cols-5 lg:grid-cols-5 grid-flow-row z-0 relative mb-10 min-w-full'>
 					{yourSeats.map((seat, index) => (
 						<div
+							key={seat.col + seat.seatLetter}
 							className='h-10 relative cursor-pointer'
 							onClick={(e) => {
 								removeYourSeat(e, seat)
