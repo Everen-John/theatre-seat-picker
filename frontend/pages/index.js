@@ -1,18 +1,37 @@
 import Head from "next/head"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
+import { object, string, number, date, InferType } from "yup"
+
 import Header from "@/components/layout/header"
 import Container from "@/components/layout/container"
 import Cinema from "@/components/cinema/cinema"
 import Tooltip from "react-tooltip"
 import Master from "@/components/layout/master"
 import YourSeats from "@/components/yourSeats/yourSeats"
+import EmailModal from "@/components/cinema/emailModal"
+import { Router, useRouter } from "next/router"
 
+let yourDataSchema = object({
+	fullName: string()
+		.matches(/^[a-zA-Z ]+$/)
+		.required(),
+	email: string().email().required(),
+})
 export default function Home() {
-	let [cinemaData, setCinemaData] = useState()
-	let [isLoading, setIsLoading] = useState(true)
-	let [yourSeats, setYourSeats] = useState([])
-	let [yourTotal, setYourTotal] = useState(0)
-	let [enableSubmit, setEnableSubmit] = useState(false)
+	const [cinemaData, setCinemaData] = useState()
+	const [isLoading, setIsLoading] = useState(true)
+	const [yourSeats, setYourSeats] = useState([])
+	const [yourTotal, setYourTotal] = useState(0)
+	const [enableSubmit, setEnableSubmit] = useState(false)
+	const [enable2ndSubmit, setEnable2ndSubmit] = useState(false)
+	const [openBookingModal, setOpenBookingModal] = useState(false)
+	const [yourData, setYourData] = useState({
+		fullName: "",
+		email: "",
+	})
+	const modalCancelButtonRef = useRef(null)
+
+	const router = useRouter()
 
 	const loadPage = async () => {
 		return new Promise(async (resolve, reject) => {
@@ -46,26 +65,6 @@ export default function Home() {
 			redirect: "follow", // manual, *follow, error
 			referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url), // body data type must match "Content-Type" header
 		}).then((res) => res.json())
-		return res
-	}
-
-	const checkSeatAvailability = async (seat) => {
-		let res = await fetch("/api/seat/checkSeat", {
-			method: "POST", // *GET, POST, PUT, DELETE, etc.
-			mode: "cors", // no-cors, *cors, same-origin
-			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: "same-origin", // include, *same-origin, omit
-			headers: {
-				"Content-Type": "application/json",
-				// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			redirect: "follow", // manual, *follow, error
-			referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url), // body data type must match "Content-Type" header
-			body: JSON.stringify({
-				...seat,
-			}),
-		}).then((res) => res.json())
-
 		return res
 	}
 
@@ -133,6 +132,40 @@ export default function Home() {
 		return res
 	}
 
+	const updateCinemaOnServer = async (seats, statusChange) => {
+		let res = await fetch("/api/cinema/updateCinema", {
+			method: "POST", // *GET, POST, PUT, DELETE, etc.
+			mode: "cors", // no-cors, *cors, same-origin
+			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+			credentials: "same-origin", // include, *same-origin, omit
+			headers: {
+				"Content-Type": "application/json",
+				// 'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			redirect: "follow", // manual, *follow, error
+			referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url), // body data type must match "Content-Type" header
+			body: JSON.stringify({ seats, statusChange, yourData }),
+		}).then((res) => res.json())
+
+		return res
+	}
+
+	const submitSeats = async () => {
+		let res = await updateCinemaOnServer(yourSeats, "PERMANENTLYOCCUPY")
+		if (res) {
+			window.alert("Successfully Booked!")
+			router.reload()
+		} else {
+			window.alert("Failed to Book!")
+			router.reload
+		}
+	}
+
+	const yourDataChangeHandler = (e) => {
+		console.log(e.target.name, e.target.value)
+		setYourData({ ...yourData, [e.target.name]: e.target.value })
+	}
+
 	const removeYourSeat = (e, seat) => {
 		//TODO
 		console.log(seat)
@@ -170,6 +203,18 @@ export default function Home() {
 		}
 	}, [yourSeats])
 
+	useEffect(() => {
+		console.log(yourData)
+		console.log(yourDataSchema.isValidSync(yourData))
+		if (yourData) {
+			if (yourDataSchema.isValidSync(yourData)) {
+				setEnable2ndSubmit(true)
+			} else {
+				setEnable2ndSubmit(false)
+			}
+		}
+	}, [yourData])
+
 	return (
 		<div>
 			<Head>
@@ -204,10 +249,23 @@ export default function Home() {
 										bookingFee={cinemaData.bookingFee}
 										yourTotal={yourTotal}
 										enableSubmit={enableSubmit}
+										setOpenBookingModal={setOpenBookingModal}
 									/>
 								</Container>
 							</section>
 						</div>
+						<EmailModal
+							open={openBookingModal}
+							setOpen={setOpenBookingModal}
+							cancelButtonRef={modalCancelButtonRef}
+							yourSeats={yourSeats}
+							yourData={yourData}
+							yourDataChangeHandler={yourDataChangeHandler}
+							yourTotal={yourTotal}
+							bookingFee={cinemaData.bookingFee}
+							enable2ndSubmit={enable2ndSubmit}
+							submitSeats={submitSeats}
+						/>
 					</Master>
 				</main>
 			)}

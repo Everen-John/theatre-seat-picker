@@ -1,19 +1,19 @@
 package com.example.movieTheatre;
 
 public class Person {
-    private String firstName;
+    private String fullName;
     private String email;
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Person(String firstName, String email) {
-        this.firstName = firstName;
+    public Person(String fullName, String email) {
+        this.fullName = fullName;
         this.email = email;
     }
 }

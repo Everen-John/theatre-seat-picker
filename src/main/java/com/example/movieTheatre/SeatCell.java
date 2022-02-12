@@ -1,5 +1,7 @@
 package com.example.movieTheatre;
 
+import com.example.movieTheatre.Seat.Status;
+
 public class SeatCell {
     private int row;
     private int col;

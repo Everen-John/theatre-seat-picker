@@ -18,7 +18,7 @@ public class Seat {
 
     private Status status;
     private Type type;
-    private String satBy;
+    private Person satBy;
     private double priceInPounds;
 
     public void setType(Type type) {
@@ -29,11 +29,11 @@ public class Seat {
         this.status = status;
     }
 
-    public void setSatBy(String satBy) {
+    public void setSatBy(Person satBy) {
         this.satBy = satBy;
     }
 
-    public String getSatBy(String policy) {
+    public Person getSatBy() {
         return satBy;
     }
 

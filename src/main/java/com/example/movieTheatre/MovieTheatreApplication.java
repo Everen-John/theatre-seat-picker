@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringBootApplication
 @RestController
@@ -20,10 +23,36 @@ public class MovieTheatreApplication {
 	public static Hashtable<String, Cinema> cinemaDict;
 	public static double bookingFee;
 
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+	void sendEmail(SubmissionInput submissionInput) {
+
+		String seatCellsString = "Your Seats are:\n ";
+		for (int i = 0; i < submissionInput.seatCellsInput.length; i++) {
+
+			seatCellsString += Character.toString(submissionInput.seatCellsInput[i].getSeatLetter()) +
+					+submissionInput.seatCellsInput[i].getCol() + ": "
+					+ submissionInput.seatCellsInput[i].getSeat().getType()
+					+ "\n ";
+			System.out.println(seatCellsString);
+		}
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setTo(submissionInput.personInput.getEmail());
+		msg.setSubject("Hi " + submissionInput.personInput.getFullName() + ", you've successfully booked your seats!");
+		msg.setText(
+				" Hi " + submissionInput.personInput.getFullName() + ", you've successfully booked your seats!\n"
+						+ seatCellsString + "\n"
+						+ "Thank you for booking with us!");
+
+		javaMailSender.send(msg);
+
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(MovieTheatreApplication.class, args);
 		cinemaDict = new Hashtable<String, Cinema>();// Placeholder Database for prototyper
-		cinemaDict.put("Cinema1", new Cinema(12, 12, "The Matrix", 0.79));
+		cinemaDict.put("Cinema1", new Cinema(20, 20, "The Matrix", 0.79));
 		bookingFee = 0.79;
 
 	}
@@ -39,6 +68,39 @@ public class MovieTheatreApplication {
 
 		Cinema cinema = cinemaDict.get("Cinema1");
 		return cinema;
+	}
+
+	@CrossOrigin
+	@PostMapping("/cinema")
+	@ResponseStatus(HttpStatus.OK)
+	public boolean updateCinema(@RequestBody SubmissionInput submissionInput,
+
+			@RequestParam(value = "statusChange", defaultValue = "none") String statusChange
+	// @RequestParam(value = "satByInput", defaultValue = "none") String satByInput,
+	// @RequestBody Person personInput
+	) {
+		System.out.println(
+				"Email Test");
+		Cinema cinema = cinemaDict.get("Cinema1");
+		if (!statusChange.isEmpty()) {
+			switch (statusChange) {
+				case "PERMANENTLYOCCUPY":
+					for (SeatCell seatCell : submissionInput.seatCellsInput) {
+						cinema.getSeatGrid().getSeatCells()[seatCell.getRow()][seatCell.getCol()].getSeat()
+								.setStatus(Seat.Status.OCCUPIED);
+						cinema.getSeatGrid().getSeatCells()[seatCell.getRow()][seatCell.getCol()].getSeat()
+								.setSatBy(submissionInput.personInput);
+					}
+					sendEmail(submissionInput);
+
+					return true;
+				default:
+					return false;
+			}
+		} else {
+			return false;
+		}
+
 	}
 
 	@CrossOrigin

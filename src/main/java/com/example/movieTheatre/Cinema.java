@@ -24,4 +24,5 @@ public class Cinema {
         this.seatGrid = new SeatGrid(numOfSeatsHorizontal, numOfSeatsVertical);
         this.bookingFee = bookingFee;
     }
+
 }

@@ -4,6 +4,7 @@ const YourSeats = ({
 	bookingFee,
 	yourTotal,
 	enableSubmit,
+	setOpenBookingModal,
 }) => {
 	console.log(yourSeats)
 	const seatTypeSwitch = (seat) => {
@@ -57,7 +58,7 @@ const YourSeats = ({
 				<div className='grid gap-3 grid-cols-4 md:grid-cols-5 lg:grid-cols-5 grid-flow-row z-0 relative mb-10 min-w-full'>
 					{yourSeats.map((seat, index) => (
 						<div
-							className='h-10 relative'
+							className='h-10 relative cursor-pointer'
 							onClick={(e) => {
 								removeYourSeat(e, seat)
 							}}
@@ -88,6 +89,9 @@ const YourSeats = ({
 							: " bg-gray-300")
 					}
 					disabled={!enableSubmit}
+					onClick={() => {
+						setOpenBookingModal(true)
+					}}
 				>
 					DONE
 				</button>
