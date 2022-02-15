@@ -6,6 +6,7 @@ Thoughts and insight on ideation can be read in WRITEUP.html
 ## Live View
 
 The system's live version can be seen [here](https://peaceful-springs-56939.herokuapp.com/)
+
 *Note that due to the backend loading longer than the front end when the container is starting, the website would get stuck on loading initially. Feel free to refresh the page after a while of loading.
 
 ## Getting Started
