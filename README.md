@@ -1,6 +1,7 @@
 # Theatre Seat picking system
 
 This project is a theatre seat picking system made with Java Spring as the backend and NextJS for its frontend as an entry for the OCBC HACK-IT! Competition.
+Thoughts and insight on ideation can be read in WRITEUP.html
 
 ## Live View
 

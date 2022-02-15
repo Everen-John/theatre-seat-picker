@@ -1,13 +1,330 @@
-<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body>
+		<header class="fixed w-full">
+			<div
+				class="bg-gradient-to-r from-slate-100 to-slate-300 shadow-md border border-slate-400"
+			>
+				<div class="p-2">
+					<div class="flex justify-around">
+						<div>
+							<h2 class="text-2xl font-medium">
+								OCBC HACK-IT! Final Accessment Write-Up
+							</h2>
+							<h3>John Tan Han Seng</h3>
+						</div>
+						<img src="./writeupImg/OCBCHackit.png" class="w-auto h-16" />
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="p-10 bg-slate-200">
+			<section class="min-h-screen bg-white border border-gray-300 shadow-2xl">
+				<div class="flex justify-center pt-40">
+					<div class="flex-col flex">
+						<h1 class="text-4xl">John Tan Han Seng</h1>
+						<h2 class="">OCBC HACK-IT! Assessment Write-Up</h2>
+					</div>
+				</div>
+				<div class="p-20">
+					<a
+						href="https://peaceful-springs-56939.herokuapp.com/"
+						class="text-cyan-700 no-underline hover:underline mr-10"
+						><img
+							src="./writeupImg/herokuLogo.png"
+							class="h-10 inline-block mr-6"
+						/>Deployed Site</a
+					>
+					<div class="text-xs mb-10">
+						*Note that due to the backend loading longer than the front end when
+						the container is starting, the website would get stuck on loading
+						initially. Feel free to refresh the page after a while of loading.
+					</div>
+					<a
+						href="https://github.com/Everen-John/theatre-seat-picker"
+						class="text-cyan-700 no-underline hover:underline mr-10"
+						><img
+							src="./writeupImg/GithubLogo.png"
+							class="h-10 inline-block mr-6"
+						/>Github Repository</a
+					>
+				</div>
+			</section>
+
+			<section
+				class="min-h-screen border bg-white p-20 border-gray-300 shadow-2xl"
+			>
+				<h1 class="text-4xl font-medium mb-10">Overview</h1>
+				<div class="m-2">
+					<h2 class="text-2xl font-medium mb-6">Frameworks/ Libraries Used</h2>
+					<p>
+						The stack used for this project is
+						<span>
+							<a
+								href="https://spring.io/guides/gs/serving-web-content/"
+								class="text-cyan-700 no-underline hover:underline"
+								data-tooltip-target="spring-tooltip"
+							>
+								<img
+									src="./writeupImg/springLogo.png"
+									class="h-6 inline-block"
+								/>
+								Spring
+							</a> </span
+						>,
+						<span>
+							<a
+								href="https://nextjs.org/"
+								class="text-cyan-700 no-underline hover:underline"
+								data-tooltip-target="spring-tooltip"
+							>
+								<img
+									src="./writeupImg/NextjsLogo.png"
+									class="h-6 inline-block"
+								/>
+								NextJs.
+							</a>
+						</span>
+						Libraries used include
+						<span>
+							<a
+								href="https://tailwindcss.com/"
+								class="text-cyan-700 no-underline hover:underline"
+								data-tooltip-target="spring-tooltip"
+							>
+								<img
+									src="./writeupImg/TailwindLogo.png"
+									class="h-6 inline-block"
+								/>
+								Tailwind CSS
+							</a>
+							and
+							<a
+								href="https://github.com/jquense/yup"
+								class="text-cyan-700 no-underline hover:underline"
+								data-tooltip-target="spring-tooltip"
+							>
+								yup
+							</a>
+							.
+						</span>
+					</p>
+				</div>
+				<div class="m-4">
+					<h3 class="text-2xl font-medium">
+						<img src="./writeupImg/springLogo.png" class="w-10 inline-block" />
+						Spring
+					</h3>
+					<p>
+						Spring is the Java backend used for this project. This is because it
+						was highly recommended and easy to get started. While I have never
+						used any Java frameworks for my projects, Spring has been fast
+						enough to pick up and get running in less than a day.
+					</p>
+				</div>
+				<div class="m-4">
+					<h3 class="text-2xl font-medium">
+						<img src="./writeupImg/NextjsLogo.png" class="w-10 inline-block" />
+						NextJS
+					</h3>
+					<p>
+						NextJS is the frontend used for this project. NextJS is a fullstack
+						framework that utilizes React and serverless functions and heightens
+						the power of React by providing serverless functions that can turn
+						any web page into a server-sided, client-sided, or statically
+						generated web page. This means that while in this project, NextJS is
+						used primarily as a frontend to write React code, functions such as
+						<code>getServerSideProps</code> can turn the webpage into a
+						server-rendered page, allowing the developer to choose multiple
+						rendering methods based on how secure the system needs to be.
+					</p>
+					<p>
+						NextJS also has built in routing and API routes, which allows
+						developers to hide their APIs from users to improve security, which
+						is heavily utilized in this project.
+					</p>
+					<p>
+						In any new project started, I would always recommend the use of
+						NextJS (create-next-app rather than create-react-app), as it
+						contains all the required functions of a React-app, but with
+						elevated control for the developer with serverless functions.
+					</p>
+				</div>
+				<div class="m-4">
+					<h3 class="text-2xl font-medium">
+						<img
+							src="./writeupImg/TailwindLogo.png"
+							class="w-10 inline-block"
+						/>
+						Tailwind CSS
+					</h3>
+					<p>
+						Tailwind CSS is the utility-class focused CSS framework used in this
+						project. It is a good combination with React due to its
+						utility-class based design. Tailwind CSS is a great way to quickly
+						create a consistent look and feel for your website.
+					</p>
+				</div>
+				<div class="m-4">
+					<h3 class="text-2xl font-medium">Yup</h3>
+					<p>
+						Yup is a Javascript Validation library that is frequently used in
+						popular form libraries such as React Formik and Redux Form. It is a
+						good way to validate forms in React due to its ability to write JSON
+						schemas and easy and clean syntax.
+					</p>
+				</div>
+			</section>
+			<section
+				class="min-h-screen border bg-white p-20 border-gray-300 shadow-2xl"
+			>
+				<h1 class="text-4xl font-medium mb-10">Evaluation Criterias</h1>
+				<div class="m-2">
+					<h2 class="text-2xl font-medium mb-6">Code Quality</h2>
+					<p>
+						For the frontend, the pages were structured in a way that all page
+						logics and states are handled within the page file. For example:
+						<code class="bg-blue-900 rounded-md text-white p-1 px-3"
+							>pages/index.js</code
+						>
+						contains all the logic for the home page and its states. However,
+						large sections of the views are componentialized and are placed into
+						the
+						<code class="bg-blue-900 rounded-md text-white p-1 px-3"
+							>components/*</code
+						>
+						folders. These component files do not have states in them. Any
+						states and change that these components do do not come from the
+						component itself, but rather the logics and functions are passed
+						into them to be used. This makes the code more organized to read
+						where the logics are.
+					</p>
+					<br />
+					<p>
+						React as a framework also helps in making the code more readable.
+						React, being a declarative framework, makes understanding the web
+						page work begins by understanding React. For example, every page
+						begins with useEffect. UseEffects run the moment the state hooks
+						initialize or change. For example, in
+						<code class="bg-blue-900 rounded-md text-white p-1 px-3"
+							>pages/index.js</code
+						>, you may begin reading the code by starting with the useEffect
+						with no variable in the second argument. This means that this effect
+						runs first in the page. Then, the page loading is done to retrieve
+						data.
+					</p>
+					<br />
+					<p>
+						As for Spring, due to my lack of knowledge in Spring and Java
+						frameworks due to my inexperience with them, I am unable to
+						factorize or arrange the code in any meaningful manner. The best I
+						could do was semantically name my functions based on the functional
+						requirements of the system. For example,
+						<code class="bg-blue-900 rounded-md text-white p-1 px-3"
+							>sendEmail</code
+						>,
+						<code class="bg-blue-900 rounded-md text-white p-1 px-3"
+							>calculateSeatsPrice</code
+						>, and
+						<code class="bg-blue-900 rounded-md text-white p-1 px-3"
+							>updateCinema</code
+						>.
+					</p>
+				</div>
+				<br />
+				<br />
+				<div class="m-2">
+					<h2 class="text-2xl font-medium mb-6">Documentation</h2>
+					<p>
+						For the frontend, I have previously used JSDocs to document my
+						functions and code. However, due to this project being a single
+						page, I would prefer to comment on the codes and semantically name
+						the functions to hint the purpose of the functions.
+					</p>
+					<br />
+					<p>
+						The same goes for the backend, where commenting functions are done
+						to indicate their purposes.
+					</p>
+					<br />
+				</div>
+				<br />
+				<br />
+				<div class="m-2">
+					<h2 class="text-2xl font-medium mb-6">Security</h2>
+					<p>
+						All the important data checking in the front end such as seat
+						availability and total price are performed server-sided. This means
+						that API calls are done to the backend all the time to check if the
+						seat is being occupied or has already been occupied by others, and
+						the total shown in the payment is not handed in client side, but the
+						total is still calculated once more on the server sided to ensure
+						that the total price cannot be spoofed.
+					</p>
+					<br />
+					<p>
+						However, due to this approach, you may notice some lag in using the
+						system. For example, clicking on a seat would feel laggy. This is
+						because clicking the seat would perform a check on server if the
+						seat is available or not, decreasing performance. Another approach
+						can be done, which is to allow these interactions be client sided,
+						but it would affect the security and the integrity of said data.
+					</p>
+					<br />
+					<p>
+						Lastly, using Typescript was a thought for this project due to its
+						strong typing and better syntax checking. However, Javascript is
+						faster for prototyping and short development.
+					</p>
+				</div>
+				<br />
+				<br />
+				<div class="m-2">
+					<h2 class="text-2xl font-medium mb-6">Extensibility</h2>
+					<p>
+						Due to the frontend's structure, it is very possible to extend the
+						system itself. However, the same cannot be said with the back end,
+						due to my poor usage and understanding in organizing Spring Web
+						systems. However, the flags and whistles required to extend the
+						system in classes are there. This means that there are no absolutely
+						fixed variables in the system. For example, the cinema can be
+						dynamically changed, and other data such as bookingFee can be
+						edited. It is also made with the idea that if the cinema system
+						should be able to enable or disable certain seats, or make a cell in
+						the seatGrid not a seat in the first place, it should be possible.
+					</p>
+					<br />
+					<p>
+						Should there be a database to store the cinema data, it should also
+						be allowed. In this prototype, a simple dictionary with Cinema
+						generics is used, and the name of the cinema is cinema1. This may be
+						changed according to GET requests of which cinema is to be obtained
+						by a database, and return the cinema object. However, due to this
+						being out of scope, it was planned to do so, but not implemented.
+					</p>
+					<br />
+					<p>
+						In summary, extensibility was a factor in deciding how to write the
+						classes and how to organize the code.
+					</p>
+					<br />
+				</div>
+				<br />
+				<br />
+				<div class="m-2">
+					<h2 class="text-2xl font-medium mb-6">Test Coverage</h2>
+					<p>
+						As of this time, I have not yet implemented the test coverage.
+						However, should I have implemented Tests, it would be done with Jest
+						for the frontend.
+					</p>
+					<br />
+				</div>
+			</section>
+		</div>
+	</body>
 </html>

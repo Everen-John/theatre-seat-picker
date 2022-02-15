@@ -264,8 +264,8 @@ export default function Home() {
 						<Header movieName={cinemaData.movieName} />
 
 						<Tooltip />
-						<div className='lg:grid lg:grid-flow-col lg:grid-cols-2'>
-							<section>
+						<div className='lg:grid lg:grid-flow-col lg:grid-cols-10'>
+							<section className=' lg:col-span-7'>
 								<Container>
 									<Cinema
 										cinemaData={cinemaData}
@@ -274,7 +274,7 @@ export default function Home() {
 									/>
 								</Container>
 							</section>
-							<section className='m-10'>
+							<section className='m-10 lg:col-span-3'>
 								<Container>
 									<YourSeats
 										yourSeats={yourSeats}
